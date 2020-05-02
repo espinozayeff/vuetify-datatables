@@ -1,5 +1,6 @@
 <template>
     <section>
+        <slot name="header">Header</slot>
         <el-input v-model="search" />
         <v-data-table
             :headers="headers"
@@ -14,7 +15,7 @@
         >
             <!-- Vuetify Column definition -->
             <template
-                v-for="(_, name) in $scopedSlots"
+                v-for="name in columns"
                 :slot="name"
                 slot-scope="slotData"
             >
@@ -22,6 +23,7 @@
                 <slot :name="name" v-bind="slotData" />
             </template>
         </v-data-table>
+        <slot name="footer">Footer</slot>
     </section>
 </template>
 
@@ -87,8 +89,16 @@ export default {
             search: null,
         }
     },
+    computed: {
+        columns() {
+            return Object.keys(this.$scopedSlots).filter(c =>
+                c.startsWith('item.'),
+            )
+        },
+    },
     mounted() {
-        console.log(this.$scopedSlots)
+        console.log('Scoped', this.$scopedSlots)
+        console.log('Slots', this.$slots)
         this.fetchData()
     },
     methods: {

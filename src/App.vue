@@ -4,9 +4,7 @@
             <v-container class="mt-10">
                 <H1>hola</H1>
                 <DataTable>
-                    <template scope="header">
-                        Cabecera X
-                    </template>
+                    <h1 slot="header">Custom Header Table</h1>
                     <template v-slot:item.address="{ item }">
                         <p>
                             <strong>Prueba Address</strong>: {{ item.address }}
@@ -21,20 +19,6 @@
                         </el-tag>
                     </template>
                 </DataTable>
-
-                <!--<DataTable>
-                    <template v-slot:item.address="{ item }">
-                        <p>
-                            Direccion de prueba.
-                            <small>{{ item.address }}</small>
-                        </p>
-                    </template>
-                </DataTable>-->
-                <!--<TestParent>
-                    <template v-slot:column.x>
-                        <h6>Columna x</h6>
-                    </template>
-                </TestParent>-->
             </v-container>
         </v-content>
     </v-app>
